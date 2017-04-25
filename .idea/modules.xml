@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ImageSignerDemo.iml" filepath="$PROJECT_DIR$/ImageSignerDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/imagepainter/imagepainter.iml" filepath="$PROJECT_DIR$/imagepainter/imagepainter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/imagepainterdemo/imagepainterdemo.iml" filepath="$PROJECT_DIR$/imagepainterdemo/imagepainterdemo.iml" />
+    </modules>
+  </component>
+</project>
