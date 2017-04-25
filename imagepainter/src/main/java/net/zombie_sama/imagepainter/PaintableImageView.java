@@ -19,17 +19,17 @@ public class PaintableImageView extends android.support.v7.widget.AppCompatImage
     private boolean isPainting;
     private float startX = 0, startY = 0;
     private OnDrawDoneListener onDrawDoneListener;
-    // ç¼©æ”¾æ¯”
+    // Ëõ·Å±È
     private float scale;
-    // æºå›¾ç‰‡
+    // Ô´Í¼Æ¬
     private Bitmap bitmapSrc;
-    // ç¼“å­˜å›¾ç‰‡
+    // »º´æÍ¼Æ¬
     private Bitmap bitmapCache;
-    // Viewé•¿å®½æ¯”
+    // View³¤¿í±È
     private float ratioView;
-    // Bitmapé•¿å®½æ¯”
+    // Bitmap³¤¿í±È
     private float ratioImage;
-    // åç§»é‡
+    // Æ«ÒÆÁ¿
     private float offset;
 
     public PaintableImageView(Context context, AttributeSet attrs) {
@@ -121,32 +121,32 @@ public class PaintableImageView extends android.support.v7.widget.AppCompatImage
     }
 
     /**
-     * è®¾ç½®ç”»ç¬”é¢œè‰²
+     * ÉèÖÃ»­±ÊÑÕÉ«
      *
-     * @param color é¢œè‰²
+     * @param color ÑÕÉ«
      */
     public void setPaintColor(int color) {
         paint.setColor(color);
     }
 
     /**
-     * è·å–ç”»ç¬”é¢œè‰²
+     * »ñÈ¡»­±ÊÑÕÉ«
      */
     public int getPaintColor() {
         return paint.getColor();
     }
 
     /**
-     * è®¾ç½®ç”»ç¬”å®½åº¦
+     * ÉèÖÃ»­±Ê¿í¶È
      *
-     * @param width å®½åº¦
+     * @param width ¿í¶È
      */
     public void setPaintStrokeWidth(float width) {
         paint.setStrokeWidth(width);
     }
 
     /**
-     * è·å–ç”»ç¬”å®½åº¦
+     * »ñÈ¡»­±Ê¿í¶È
      */
     public float getPaintStrokeWidth() {
         return paint.getStrokeWidth();
@@ -157,7 +157,7 @@ public class PaintableImageView extends android.support.v7.widget.AppCompatImage
     }
 
     /**
-     * è®¾ç½®ç”»ç¬”
+     * ÉèÖÃ»­±Ê
      *
      * @param paint {@link Paint}
      */
@@ -166,30 +166,30 @@ public class PaintableImageView extends android.support.v7.widget.AppCompatImage
     }
 
     /**
-     * é‡ç½®å›¾ç‰‡
+     * ÖØÖÃÍ¼Æ¬
      */
     public void rest() {
         setImageBitmap(bitmapSrc);
     }
 
     /**
-     * è·å–å½“å‰Bitmap
+     * »ñÈ¡µ±Ç°Bitmap
      */
     public Bitmap getResult() {
         return bitmapCache;
     }
 
     /**
-     * ç¼©æ”¾æ¯”æ‰€åŸºäºçš„æ–¹å‘
+     * Ëõ·Å±ÈËù»ùÓÚµÄ·½Ïò
      */
     private enum ScaleDirection {
         width, height;
     }
 
     /**
-     * è®¾ç½®ç”»å®Œä¸€ç¬”æ—¶çš„å›è°ƒ
+     * ÉèÖÃ»­ÍêÒ»±ÊÊ±µÄ»Øµ÷
      *
-     * @param onDrawDoneListener å›è°ƒ
+     * @param onDrawDoneListener »Øµ÷
      */
     public void setOnDrawDoneListener(OnDrawDoneListener onDrawDoneListener) {
         this.onDrawDoneListener = onDrawDoneListener;
