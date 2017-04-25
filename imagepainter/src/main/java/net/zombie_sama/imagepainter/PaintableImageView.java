@@ -18,6 +18,7 @@ public class PaintableImageView extends android.support.v7.widget.AppCompatImage
     private Canvas canvas;
     private boolean isPainting;
     private float startX = 0, startY = 0;
+    private OnDrawDoneListener onDrawDoneListener;
     // 缩放比
     private float scale;
     // 源图片
@@ -32,7 +33,8 @@ public class PaintableImageView extends android.support.v7.widget.AppCompatImage
     private float offset;
 
     public PaintableImageView(Context context, AttributeSet attrs) {
-        super(context, attrs);paint = new Paint();
+        super(context, attrs);
+        paint = new Paint();
         paint.setColor(Color.BLACK);
         paint.setStrokeWidth(3f);
         setOnTouchListener(new OnTouchListener() {
@@ -50,6 +52,9 @@ public class PaintableImageView extends android.support.v7.widget.AppCompatImage
                         case MotionEvent.ACTION_UP:
                             draw(event);
                             isPainting = false;
+                            if (onDrawDoneListener != null) {
+                                onDrawDoneListener.onDrawDone(bitmapCache);
+                            }
                             break;
                     }
                     return true;
@@ -127,7 +132,7 @@ public class PaintableImageView extends android.support.v7.widget.AppCompatImage
     /**
      * 获取画笔颜色
      */
-    public int getPaintColor(){
+    public int getPaintColor() {
         return paint.getColor();
     }
 
@@ -178,6 +183,19 @@ public class PaintableImageView extends android.support.v7.widget.AppCompatImage
      * 缩放比所基于的方向
      */
     private enum ScaleDirection {
-        width, height
+        width, height;
+    }
+
+    /**
+     * 设置画完一笔时的回调
+     *
+     * @param onDrawDoneListener 回调
+     */
+    public void setOnDrawDoneListener(OnDrawDoneListener onDrawDoneListener) {
+        this.onDrawDoneListener = onDrawDoneListener;
+    }
+
+    interface OnDrawDoneListener {
+        void onDrawDone(Bitmap bitmap);
     }
 }
