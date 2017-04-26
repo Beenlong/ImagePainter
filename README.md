@@ -10,7 +10,7 @@ Paint or sign on image
 ## Dependencies
 
 ```
-compile 'net.zombie_sama.imagepainter:imagepainter:0.1.2'
+compile 'net.zombie_sama.imagepainter:imagepainter:0.2'
 ```
 
 
