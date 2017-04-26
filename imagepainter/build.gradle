@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
-version = '0.1.1'
+version = '0.2'
 
 android {
     compileSdkVersion 25
@@ -10,8 +10,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName version
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -92,13 +92,7 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = "maven"
-        name = "net.zombie_sama.imagepainter"    //发布到JCenter上的项目名字
-        version {
-            name = version
-            desc = "Paint on image"
-            released = new Date()
-            vcsTag = version
-        }
+        name = group
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
