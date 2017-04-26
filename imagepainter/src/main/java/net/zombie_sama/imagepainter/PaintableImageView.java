@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-
 public class PaintableImageView extends android.support.v7.widget.AppCompatImageView {
     private Paint paint;
     private ScaleDirection direction;
@@ -19,17 +18,17 @@ public class PaintableImageView extends android.support.v7.widget.AppCompatImage
     private boolean isPainting;
     private float startX = 0, startY = 0;
     private OnDrawDoneListener onDrawDoneListener;
-    // Ëõ·Å±È
+    // ç¼©æ”¾æ¯”
     private float scale;
-    // Ô´Í¼Æ¬
+    // æºå›¾ç‰‡
     private Bitmap bitmapSrc;
-    // »º´æÍ¼Æ¬
+    // ç¼“å­˜å›¾ç‰‡
     private Bitmap bitmapCache;
-    // View³¤¿í±È
+    // Viewé•¿å®½æ¯”
     private float ratioView;
-    // Bitmap³¤¿í±È
+    // Bitmapé•¿å®½æ¯”
     private float ratioImage;
-    // Æ«ÒÆÁ¿
+    // åç§»é‡
     private float offset;
 
     public PaintableImageView(Context context, AttributeSet attrs) {
@@ -121,32 +120,32 @@ public class PaintableImageView extends android.support.v7.widget.AppCompatImage
     }
 
     /**
-     * ÉèÖÃ»­±ÊÑÕÉ«
+     * è®¾ç½®ç”»ç¬”é¢œè‰²
      *
-     * @param color ÑÕÉ«
+     * @param color é¢œè‰²
      */
     public void setPaintColor(int color) {
         paint.setColor(color);
     }
 
     /**
-     * »ñÈ¡»­±ÊÑÕÉ«
+     * è·å–ç”»ç¬”é¢œè‰²
      */
     public int getPaintColor() {
         return paint.getColor();
     }
 
     /**
-     * ÉèÖÃ»­±Ê¿í¶È
+     * è®¾ç½®ç”»ç¬”å®½åº¦
      *
-     * @param width ¿í¶È
+     * @param width å®½åº¦
      */
     public void setPaintStrokeWidth(float width) {
         paint.setStrokeWidth(width);
     }
 
     /**
-     * »ñÈ¡»­±Ê¿í¶È
+     * è·å–ç”»ç¬”å®½åº¦
      */
     public float getPaintStrokeWidth() {
         return paint.getStrokeWidth();
@@ -157,7 +156,7 @@ public class PaintableImageView extends android.support.v7.widget.AppCompatImage
     }
 
     /**
-     * ÉèÖÃ»­±Ê
+     * è®¾ç½®ç”»ç¬”
      *
      * @param paint {@link Paint}
      */
@@ -166,36 +165,36 @@ public class PaintableImageView extends android.support.v7.widget.AppCompatImage
     }
 
     /**
-     * ÖØÖÃÍ¼Æ¬
+     * é‡ç½®å›¾ç‰‡
      */
-    public void rest() {
+    public void reset() {
         setImageBitmap(bitmapSrc);
     }
 
     /**
-     * »ñÈ¡µ±Ç°Bitmap
+     * è·å–å½“å‰Bitmap
      */
     public Bitmap getResult() {
         return bitmapCache;
     }
 
     /**
-     * Ëõ·Å±ÈËù»ùÓÚµÄ·½Ïò
+     * ç¼©æ”¾æ¯”æ‰€åŸºäºçš„æ–¹å‘
      */
     private enum ScaleDirection {
         width, height;
     }
 
     /**
-     * ÉèÖÃ»­ÍêÒ»±ÊÊ±µÄ»Øµ÷
+     * è®¾ç½®ç”»å®Œä¸€ç¬”æ—¶çš„å›è°ƒ
      *
-     * @param onDrawDoneListener »Øµ÷
+     * @param onDrawDoneListener å›è°ƒ
      */
     public void setOnDrawDoneListener(OnDrawDoneListener onDrawDoneListener) {
         this.onDrawDoneListener = onDrawDoneListener;
     }
 
-    interface OnDrawDoneListener {
+    public interface OnDrawDoneListener {
         void onDrawDone(Bitmap bitmap);
     }
 }

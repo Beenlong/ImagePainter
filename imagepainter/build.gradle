@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
+version = '0.1.1'
 
 android {
     compileSdkVersion 25
@@ -27,27 +28,59 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
 }
 
-group = 'net.zombie_sama.imagepainter'
-version = '0.5.1'
+def siteUrl = 'https://github.com/Beenlong/ImagePainter'   // 项目的主页
+def gitUrl = 'https://github.com/Beenlong/ImagePainter.git'   // Git仓库的url
+group = "net.zombie_sama.imagepainter"
 
-task generateSourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier 'sources'
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging 'aar'
+                name 'Image Painter'
+                url siteUrl
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'Beenlong'        //填写的一些基本信息
+                        name 'Zombie sama'
+                        email 'yyy66663@foxmail.com'
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
 }
 
-task generateJavadocs(type: Javadoc) {
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
+    options.encoding = "UTF-8"
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
 }
 
-task generateJavadocsJar(type: Jar, dependsOn: generateJavadocs) {
-    from generateJavadocs.destinationDir
-    classifier 'javadoc'
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
 }
 
 artifacts {
-    archives generateJavadocsJar
-    archives generateSourcesJar
+    archives javadocJar
+    archives sourcesJar
 }
 
 Properties properties = new Properties()
@@ -56,22 +89,19 @@ properties.load(project.rootProject.file('local.properties').newDataInputStream(
 bintray {
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")
-
+    configurations = ['archives']
     pkg {
-        repo = 'maven'
-        name = 'net.zombie_sama.imagepainter'
-
+        repo = "maven"
+        name = "net.zombie_sama.imagepainter"    //发布到JCenter上的项目名字
         version {
-            name = '0.5.1'
+            name = version
             desc = "Paint on image"
             released = new Date()
-            vcsTag = '0.5.1'
+            vcsTag = version
         }
-
-        licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/Beenlong/ImagePainter.git'
-        websiteUrl = 'https://github.com/Beenlong/ImagePainter'
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = ["Apache-2.0"]
+        publish = true
     }
-
-    configurations = ['archives']
 }

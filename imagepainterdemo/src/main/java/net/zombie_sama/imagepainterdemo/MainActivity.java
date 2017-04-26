@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "WHITE", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.button:
-                    piv.rest();
+                    piv.reset();
                     break;
             }
         }
