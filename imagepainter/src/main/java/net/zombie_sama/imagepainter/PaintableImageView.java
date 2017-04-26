@@ -101,7 +101,7 @@ public class PaintableImageView extends android.support.v7.widget.AppCompatImage
     }
 
     private void loadBitmap() {
-        if (bitmapSrc == null) bitmapSrc = ((BitmapDrawable) getDrawable()).getBitmap();
+        bitmapSrc = ((BitmapDrawable) getDrawable()).getBitmap();
         bitmapCache = bitmapSrc.copy(bitmapSrc.getConfig(), true);
         if (canvas == null) canvas = new Canvas(bitmapCache);
         canvas.setBitmap(bitmapCache);
@@ -130,6 +130,8 @@ public class PaintableImageView extends android.support.v7.widget.AppCompatImage
 
     /**
      * 获取画笔颜色
+     *
+     * @return color
      */
     public int getPaintColor() {
         return paint.getColor();
@@ -146,6 +148,8 @@ public class PaintableImageView extends android.support.v7.widget.AppCompatImage
 
     /**
      * 获取画笔宽度
+     *
+     * @return width
      */
     public float getPaintStrokeWidth() {
         return paint.getStrokeWidth();
@@ -173,6 +177,8 @@ public class PaintableImageView extends android.support.v7.widget.AppCompatImage
 
     /**
      * 获取当前Bitmap
+     *
+     * @return bitmap
      */
     public Bitmap getResult() {
         return bitmapCache;
