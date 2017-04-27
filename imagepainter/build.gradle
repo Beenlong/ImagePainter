@@ -1,16 +1,19 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
-version = '0.2.1'
+version = '0.2.5'
 
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
 
+    lintOptions {
+        abortOnError false
+    }
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 4
+        versionCode 7
         versionName version
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -69,8 +72,8 @@ task sourcesJar(type: Jar) {
 
 task javadoc(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
-    options.encoding = "UTF-8"
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    options.encoding = "UTF-8"
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {

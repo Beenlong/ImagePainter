@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                piv.setPaintStrokeWidth(strokeWidth + 1);
+                piv.setPaintStrokeWidth(seekBar.getProgress() + 1);
             }
         });
     }

@@ -33,6 +33,7 @@ public class PaintableImageView extends android.support.v7.widget.AppCompatImage
 
     public PaintableImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        super.setScaleType(ScaleType.FIT_CENTER);
         paint = new Paint();
         paint.setColor(Color.BLACK);
         paint.setStrokeWidth(3f);
@@ -66,6 +67,11 @@ public class PaintableImageView extends android.support.v7.widget.AppCompatImage
     }
 
     @Override
+    public void setScaleType(ScaleType scaleType) {
+        super.setScaleType(ScaleType.FIT_CENTER);
+    }
+
+    @Override
     public void onWindowFocusChanged(boolean hasWindowFocus) {
         super.onWindowFocusChanged(hasWindowFocus);
         if (hasWindowFocus) {
@@ -73,9 +79,19 @@ public class PaintableImageView extends android.support.v7.widget.AppCompatImage
         }
     }
 
-    @Override
     public void setImageBitmap(Bitmap bm) {
+        setImageBitmap(bm, true);
+    }
+
+    /**
+     * 设置图片
+     *
+     * @param bm    图片
+     * @param asSrc true将把传入的图片作为源图片
+     */
+    public void setImageBitmap(Bitmap bm, boolean asSrc) {
         super.setImageBitmap(bm);
+        if (asSrc) bitmapSrc = bm.copy(bm.getConfig(), false);
         loadBitmap();
     }
 
@@ -92,7 +108,7 @@ public class PaintableImageView extends android.support.v7.widget.AppCompatImage
             startX = x;
             startY = y;
         } else {
-            Log.i("draw", "x:from " + startX + " to " + event.getX() + " y:from " + startY + " to " + event.getY());
+            Log.i("draw", "x:from " + startX + " to " + x + " y:from " + startY + " to " + y);
             canvas.drawLine(startX, startY, x, y, paint);
             startX = x;
             startY = y;
@@ -101,8 +117,9 @@ public class PaintableImageView extends android.support.v7.widget.AppCompatImage
     }
 
     private void loadBitmap() {
-        bitmapSrc = ((BitmapDrawable) getDrawable()).getBitmap();
-        bitmapCache = bitmapSrc.copy(bitmapSrc.getConfig(), true);
+        Bitmap bm = ((BitmapDrawable) getDrawable()).getBitmap();
+        if (bitmapSrc == null) bitmapSrc = bm;
+        bitmapCache = bm.copy(bm.getConfig(), true);
         if (canvas == null) canvas = new Canvas(bitmapCache);
         canvas.setBitmap(bitmapCache);
         super.setImageBitmap(bitmapCache);
@@ -111,11 +128,11 @@ public class PaintableImageView extends android.support.v7.widget.AppCompatImage
         if (ratioView > ratioImage) {
             scale = (float) getHeight() / (float) bitmapCache.getHeight();
             direction = ScaleDirection.height;
-            offset = Math.abs(((float) getWidth() - ((float) getWidth() / scale)) / 2);
+            offset = ((float) getWidth() - ((float) bitmapCache.getWidth() * scale)) / 2 / scale;
         } else {
             scale = (float) getWidth() / (float) bitmapCache.getWidth();
             direction = ScaleDirection.width;
-            offset = Math.abs(((float) getHeight() - ((float) getHeight() / scale)) / 2);
+            offset = ((float) getHeight() - ((float) bitmapCache.getHeight() * scale)) / 2 / scale;
         }
     }
 
@@ -188,7 +205,7 @@ public class PaintableImageView extends android.support.v7.widget.AppCompatImage
      * 缩放比所基于的方向
      */
     private enum ScaleDirection {
-        width, height;
+        width, height
     }
 
     /**
