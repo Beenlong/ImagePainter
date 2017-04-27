@@ -10,7 +10,7 @@ Paint or sign on image
 ## Dependencies
 
 ```
-compile 'net.zombie_sama.imagepainter:imagepainter:0.2'
+compile 'net.zombie_sama.imagepainter:imagepainter:0.2.5'
 ```
 
 
@@ -18,7 +18,7 @@ compile 'net.zombie_sama.imagepainter:imagepainter:0.2'
 
 Simply put `net.zombie_sama.imagepainter.PaintableImageView` in your layout just like a normal `ImageView`
 
-```java
+```
 //Set image
 PaintableImageView.setImageBitmap(Bitmap bitmap);
 
